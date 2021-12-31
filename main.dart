@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:flutter/widgets.dart';
+import 'package:quota/widgets/text.dart';
+import 'package:quota/pages/eventDetail.dart';
+import 'package:quota/widgets/eventCardOverview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,58 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const Anasayfa(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
@@ -115,23 +73,14 @@ class _AnasayfaState extends State<Anasayfa> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
-                            "Merhaba Kerem",
-                            style: TextStyle(
-                              color: HexColor('#1976D2'),
-                              fontSize: 32,
-                            ),
-                          ),
+                          child: Title2Text('Merhaba Kerem', '#1976D2'),
+
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 37),
-                          child: Text(
-                            "Burası anasayfan, buradan kayıt olduğun etkinlikleri görüntüleyebilir ve katılım durumunu düzenleyebilirsin.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: HexColor('#1976D2'),
-                              fontSize: 12,
-                            ),
+                          child: Caption2TextCenter(
+                              'Burası anasayfan, buradan kayıt olduğun etkinlikleri görüntüleyebilir ve katılım durumunu düzenleyebilirsin.',
+                              '#1976D2',
                           ),
                         ),
                         Row(
@@ -139,15 +88,7 @@ class _AnasayfaState extends State<Anasayfa> {
                             Padding(
                               padding: const EdgeInsets.only(
                                   left: 27, top: 36, bottom: 22),
-                              child: Text(
-                                "Etkinliklerim",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: HexColor('#004BA0'),
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
+                              child: Title1Text('Etkinliklerim', '#004BA0'),
                             ),
                           ],
                         ),
@@ -159,45 +100,17 @@ class _AnasayfaState extends State<Anasayfa> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
+                            child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019', eventCreator: 'Şule Turp',),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756048/Rectangle.png',eventName: 'NSİstanbul Ocak Ayı Buluşması', eventDate: 'Ocak 23, 2019',),
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756075/image_1.png', eventName: 'İstanbul Grubu 2. Buluşma', eventDate: 'Ocak 1, 2022', eventCreator: 'Berkay Çatak',),
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 40),
-                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756075/image_1.png', eventName: 'OUA İstanbul Grubu 2. Buluşması', eventDate: 'Ocak 1, 2022',),
-                        )
+                          child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756075/image_1.png', eventName: 'İstanbul Grubu 3. Buluşma', eventDate: 'Şubat 1, 2022', eventCreator: 'Berkay Çatak',),
+                        ),
                       ],
                     ),
                   ),
@@ -210,105 +123,6 @@ class _AnasayfaState extends State<Anasayfa> {
     );
   }
 }
-
-class EventPage extends StatefulWidget {
-  const EventPage({Key? key}) : super(key: key);
-
-  @override
-  _EventPageState createState() => _EventPageState();
-}
-
-class _EventPageState extends State<EventPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          color: HexColor('#FFFFFF'),
-        ),
-        child: Column(
-          children: [
-            AnasayfaAppBar(),
-            Text("Etkinlik detay sayfası"),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-class EventCardOverview extends StatelessWidget {
-   EventCardOverview({
-     required this.eventImage,
-     required this.eventName,
-     required this.eventDate,
-    Key? key,
-  }) : super(key: key);
-   String eventImage;
-   String eventName;
-   String eventDate;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-          decoration: BoxDecoration(
-            color: HexColor('#FFFFFF'),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 5,
-                blurRadius: 10,
-                offset: Offset(0, 0), // changes position of shadow
-              ),
-            ],
-          ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 36),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 6),
-                  child: Image.network(
-                      "$eventImage",
-                      height: 60,
-                      width: 60,
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "$eventName",
-                      style: TextStyle(
-                        color: HexColor('#004BA0'),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Text(
-                      "$eventDate",
-                      style: TextStyle(
-                        color: HexColor('#0077C2'),
-                        fontSize: 10,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Icon(Icons.edit, color: HexColor('#004BA0')),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class AnasayfaAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 
