@@ -4,6 +4,54 @@ import 'package:flutter/widgets.dart';
 import 'package:quota/widgets/text.dart';
 import 'package:quota/pages/eventDetail.dart';
 import 'package:quota/widgets/eventCardOverview.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+
+Future<Test> fetchTest() async {
+  final response = await http
+      .get(Uri.parse('http://localhost:3333/posts'));
+  if (response.statusCode == 200) {
+    return Test.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load');
+  }
+}
+
+//List<Test> testFromJson(String str) => List<Test>.from(json.decode(str).map((x) => Test.fromJson(x)));
+//String testToJson(List<Test> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+List<Test> testFromJson(String str) =>
+    List<Test>.from(json.decode(str).map((x) => Test.fromJson(x)));
+String questionToJson(List<Test> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class Test {
+  final int id;
+  final String title;
+  final String description;
+  final String date;
+
+  Test({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.date,
+});
+
+  factory Test.fromJson(Map<String, dynamic> json) => Test(
+      id: json['_id'],
+      title: json['title'],
+      description: json['description'],
+      date: json['date'],
+    );
+    Map<String, dynamic> toJson()=> {
+      "id": id,
+      "title": title,
+      "description": description,
+      "date": date,
+    };
+  }
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +82,13 @@ class Anasayfa extends StatefulWidget {
 }
 
 class _AnasayfaState extends State<Anasayfa> {
+  Future<Test>? futureTest;
+  bool isOnline = true;
   @override
+  void initState() {
+    super.initState();
+    futureTest = fetchTest();
+  }
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
@@ -111,6 +165,17 @@ class _AnasayfaState extends State<Anasayfa> {
                           padding: EdgeInsets.only(bottom: 40),
                           child: EventCardOverview(eventImage: 'https://www.upload.ee/image/13756075/image_1.png', eventName: 'İstanbul Grubu 3. Buluşma', eventDate: 'Şubat 1, 2022', eventCreator: 'Berkay Çatak',),
                         ),
+                        FutureBuilder<Test>(
+                          future: futureTest,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(snapshot.data!.title);
+                            } else if (snapshot.hasError) {
+                              return Text('${snapshot.error}');
+                            }
+                            return const CircularProgressIndicator();
+                          }
+                        )
                       ],
                     ),
                   ),
